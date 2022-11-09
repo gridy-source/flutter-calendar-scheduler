@@ -7,7 +7,7 @@ part of 'drift_database.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class ScheduleData extends DataClass implements Insertable<ScheduleData> {
+class Schedule extends DataClass implements Insertable<Schedule> {
   final int id;
   final String content;
   final DateTime date;
@@ -15,7 +15,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
   final int endTime;
   final int colorId;
   final DateTime createdAt;
-  const ScheduleData(
+  const Schedule(
       {required this.id,
       required this.content,
       required this.date,
@@ -36,8 +36,8 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
     return map;
   }
 
-  ScheduleCompanion toCompanion(bool nullToAbsent) {
-    return ScheduleCompanion(
+  SchedulesCompanion toCompanion(bool nullToAbsent) {
+    return SchedulesCompanion(
       id: Value(id),
       content: Value(content),
       date: Value(date),
@@ -48,10 +48,10 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
     );
   }
 
-  factory ScheduleData.fromJson(Map<String, dynamic> json,
+  factory Schedule.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return ScheduleData(
+    return Schedule(
       id: serializer.fromJson<int>(json['id']),
       content: serializer.fromJson<String>(json['content']),
       date: serializer.fromJson<DateTime>(json['date']),
@@ -75,7 +75,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
     };
   }
 
-  ScheduleData copyWith(
+  Schedule copyWith(
           {int? id,
           String? content,
           DateTime? date,
@@ -83,7 +83,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
           int? endTime,
           int? colorId,
           DateTime? createdAt}) =>
-      ScheduleData(
+      Schedule(
         id: id ?? this.id,
         content: content ?? this.content,
         date: date ?? this.date,
@@ -94,7 +94,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
       );
   @override
   String toString() {
-    return (StringBuffer('ScheduleData(')
+    return (StringBuffer('Schedule(')
           ..write('id: $id, ')
           ..write('content: $content, ')
           ..write('date: $date, ')
@@ -112,7 +112,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ScheduleData &&
+      (other is Schedule &&
           other.id == this.id &&
           other.content == this.content &&
           other.date == this.date &&
@@ -122,7 +122,7 @@ class ScheduleData extends DataClass implements Insertable<ScheduleData> {
           other.createdAt == this.createdAt);
 }
 
-class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
+class SchedulesCompanion extends UpdateCompanion<Schedule> {
   final Value<int> id;
   final Value<String> content;
   final Value<DateTime> date;
@@ -130,7 +130,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
   final Value<int> endTime;
   final Value<int> colorId;
   final Value<DateTime> createdAt;
-  const ScheduleCompanion({
+  const SchedulesCompanion({
     this.id = const Value.absent(),
     this.content = const Value.absent(),
     this.date = const Value.absent(),
@@ -139,7 +139,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
     this.colorId = const Value.absent(),
     this.createdAt = const Value.absent(),
   });
-  ScheduleCompanion.insert({
+  SchedulesCompanion.insert({
     this.id = const Value.absent(),
     required String content,
     required DateTime date,
@@ -152,7 +152,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
         startTime = Value(startTime),
         endTime = Value(endTime),
         colorId = Value(colorId);
-  static Insertable<ScheduleData> custom({
+  static Insertable<Schedule> custom({
     Expression<int>? id,
     Expression<String>? content,
     Expression<DateTime>? date,
@@ -172,7 +172,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
     });
   }
 
-  ScheduleCompanion copyWith(
+  SchedulesCompanion copyWith(
       {Value<int>? id,
       Value<String>? content,
       Value<DateTime>? date,
@@ -180,7 +180,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
       Value<int>? endTime,
       Value<int>? colorId,
       Value<DateTime>? createdAt}) {
-    return ScheduleCompanion(
+    return SchedulesCompanion(
       id: id ?? this.id,
       content: content ?? this.content,
       date: date ?? this.date,
@@ -220,7 +220,7 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
 
   @override
   String toString() {
-    return (StringBuffer('ScheduleCompanion(')
+    return (StringBuffer('SchedulesCompanion(')
           ..write('id: $id, ')
           ..write('content: $content, ')
           ..write('date: $date, ')
@@ -233,12 +233,12 @@ class ScheduleCompanion extends UpdateCompanion<ScheduleData> {
   }
 }
 
-class $ScheduleTable extends Schedule
-    with TableInfo<$ScheduleTable, ScheduleData> {
+class $SchedulesTable extends Schedules
+    with TableInfo<$SchedulesTable, Schedule> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ScheduleTable(this.attachedDatabase, [this._alias]);
+  $SchedulesTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -282,11 +282,11 @@ class $ScheduleTable extends Schedule
   List<GeneratedColumn> get $columns =>
       [id, content, date, startTime, endTime, colorId, createdAt];
   @override
-  String get aliasedName => _alias ?? 'schedule';
+  String get aliasedName => _alias ?? 'schedules';
   @override
-  String get actualTableName => 'schedule';
+  String get actualTableName => 'schedules';
   @override
-  VerificationContext validateIntegrity(Insertable<ScheduleData> instance,
+  VerificationContext validateIntegrity(Insertable<Schedule> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -333,9 +333,9 @@ class $ScheduleTable extends Schedule
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  ScheduleData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Schedule map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return ScheduleData(
+    return Schedule(
       id: attachedDatabase.options.types
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       content: attachedDatabase.options.types
@@ -354,8 +354,8 @@ class $ScheduleTable extends Schedule
   }
 
   @override
-  $ScheduleTable createAlias(String alias) {
-    return $ScheduleTable(attachedDatabase, alias);
+  $SchedulesTable createAlias(String alias) {
+    return $SchedulesTable(attachedDatabase, alias);
   }
 }
 
@@ -530,12 +530,12 @@ class $CategoryColorsTable extends CategoryColors
 
 abstract class _$LocalDatabase extends GeneratedDatabase {
   _$LocalDatabase(QueryExecutor e) : super(e);
-  late final $ScheduleTable schedule = $ScheduleTable(this);
+  late final $SchedulesTable schedules = $SchedulesTable(this);
   late final $CategoryColorsTable categoryColors = $CategoryColorsTable(this);
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [schedule, categoryColors];
+      [schedules, categoryColors];
 }
